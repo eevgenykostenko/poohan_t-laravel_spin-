@@ -28,7 +28,7 @@ class CarouselController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:5000'
         ]);
 
         $imageName = time().'.'.$request->image->extension();
