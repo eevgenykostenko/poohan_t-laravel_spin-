@@ -1,35 +1,41 @@
 @extends('layouts.admin')
 
 @section('admin_content')
-    <div class="d-flex">
-        <h2 class="mb-3">Prize List</h2>
-        <button class="btn btn-primary btn-sm mb-3 ms-3" data-bs-toggle="modal" data-bs-target="#manageRewardsModal">Manage</button>
+    <div class="card">
+        <div class="d-flex card-header">
+            <h5>Prize List</h5>
+            <button class="btn btn-primary btn-sm ms-auto" data-bs-toggle="modal"
+                    data-bs-target="#manageRewardsModal">Manage
+            </button>
+        </div>
+        <div class="card-body">
+            <table id="example" class="dataTable table table-striped">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Percentage</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($rewards as $reward)
+                    <tr>
+                        <td>{{ $loop->index + 1  }}</td>
+                        <td>{{ $reward->name  }}</td>
+                        <td>{{ $reward->percent. "%"  }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-    <table id="example" class="dataTable table table-striped">
-        <thead>
-        <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Percentage</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($rewards as $reward)
-            <tr>
-                <td>{{ $loop->index + 1  }}</td>
-                <td>{{ $reward->name  }}</td>
-                <td>{{ $reward->percent. "%"  }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
 
     <!-- Modal -->
     <div class="modal fade" id="manageRewardsModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Manage Rewards</h1>
+                    <h3 class="modal-title fs-5" id="exampleModalLabel">Manage Rewards</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -52,10 +58,10 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" id="addRewardBtn">Add</button>
-                    <button class="btn btn-primary me-auto" id="balanceRewardsBtn">Balancing</button>
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" id="saveRewardsBtn">Save</button>
+                    <button class="btn btn-sm btn-primary" id="addRewardBtn">Add</button>
+                    <button class="btn btn-sm btn-primary me-auto" id="balanceRewardsBtn">Balancing</button>
+                    <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-sm btn-primary" id="saveRewardsBtn">Save</button>
                 </div>
             </div>
         </div>
@@ -110,7 +116,7 @@
             var totalPercents = getTotalPercents();
             var percents = totalPercents - $lastRewardPriceInput.val() * 1
             if (percents > 100) {
-                alert('total percent should be 100%')
+                swal('total percent should be 100%')
                 return
             }
 
@@ -127,7 +133,7 @@
             $('#rewardsForm').submit()
         })
 
-        $(document).on('click', '.delete-reward', function(){
+        $(document).on('click', '.delete-reward', function () {
             $(this).closest('tr').remove()
         })
 

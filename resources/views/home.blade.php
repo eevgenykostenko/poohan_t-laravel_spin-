@@ -24,7 +24,7 @@
                     <label for="voucher_code" class="form-label text-white">Kode Voucher</label>
                     <input type="text" name="voucher_code" id="voucher_code" class="form-control"/>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary" id="runSpinBtn">Submit</button>
             </div>
         </div>
     </div>
@@ -42,7 +42,6 @@
         $(function () {
             if (rewards.length === 0)
                 return;
-            spinIndex = Math.floor(Math.random() * rewards.length)
 
             const segments = rewards.map((reward) => {
                 return {'text': reward.name, 'fillStyle': reward.bg_color, 'textFillStyle': reward.text_color,}
@@ -62,17 +61,36 @@
                     }
             });
 
+            $('#runSpinBtn').click(function () {
+                const voucherCode = $('#voucher_code').val()
+                if (!voucherCode) return
 
-            setTimeout(function () {
-                // Important thing is to set the stopAngle of the animation before stating the spin.
-                theWheel.animation.stopAngle = theWheel.segments[spinIndex].endAngle;
-                // Start the spin animation here.
-                theWheel.startAnimation();
-            }, 1 * 1000)
+                $.ajax({
+                    url: `{{ route('voucher.run-spin') }}`,
+                    data: {
+                        voucher_code: voucherCode,
+                    },
+                    success: function (res) {
+                        if (res === "invalid_voucher_code") {
+                            swal('Voucher code invalid')
+                        } else {
+                            spinIndex = res
+                            // Important thing is to set the stopAngle of the animation before stating the spin.
+                            // theWheel.animation.stopAngle = theWheel.segments[spinIndex].startAngle;
+                            theWheel.animation.stopAngle = theWheel.getRandomForSegment(spinIndex)
+                            // Start the spin animation here.
+                            theWheel.startAnimation();
+                        }
+                    }
+                })
+            })
+
         })
 
         function alertPrize() {
-            alert(`You won ${rewards[spinIndex].name}`)
+            swal(`You won ${rewards[spinIndex - 1].name}`).then((value) => {
+                location.reload()
+            });
         }
 
     </script>

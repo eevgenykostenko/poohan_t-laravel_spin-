@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reward;
+use App\Models\Transaction;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class RewardController extends Controller

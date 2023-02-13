@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RewardController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +21,8 @@ use App\Http\Controllers\RewardController;
 
 Route::get('/', [RewardController::class, 'home']);
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
     Route::get('/edit-profile', [LoginController::class, 'showEditProfile'])
         ->name('edit-profile');
@@ -33,6 +35,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/rewards', [RewardController::class, 'storeRewards'])
         ->name('rewards');
+
+    Route::get('vouchers/run-spin', [VoucherController::class, 'runSpin'])->name('voucher.run-spin');
+    Route::resource('vouchers', VoucherController::class);
+    Route::resource('transactions', TransactionController::class);
+
+    Route::get('/settings', [SettingsController::class, 'index'])
+        ->name('settings');
+
+    Route::get('/settings/clear-db', [SettingsController::class, 'clearDb'])
+        ->name('settings.clear_db');
 
 });
 
