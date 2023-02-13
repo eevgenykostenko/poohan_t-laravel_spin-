@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('page_style')
     @parent
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/slick-theme.css') }}"/>
 
     <style rel="stylesheet">
         body {
@@ -9,6 +11,19 @@
             background-repeat: no-repeat;
             background-position: center;
             min-height: 100vh;
+        }
+
+        .slick-dots li.slick-active button:before {
+            opacity: 1;
+            color: white;
+        }
+
+        .slick-dots li button:before {
+            font-size: 50px;
+            width: 20px;
+            height: 20px;
+            opacity: .5;
+            color: white;
         }
     </style>
 @endsection
@@ -26,6 +41,13 @@
                 </div>
                 <button class="btn btn-primary" id="runSpinBtn">Submit</button>
             </div>
+            <div class="col-lg-6 mt-5">
+                <div id="carousels">
+                    @foreach($carousels as $carousel)
+                        <img src="{{ asset("carousels/$carousel->img_path") }}" alt=""/>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -35,6 +57,7 @@
 
     <script type="text/javascript" src="{{ asset('js/win-wheel.js')  }}"></script>
     <script type="text/javascript" src="{{ asset('js/TweenMax.min.js')  }}"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         const rewards = {{ Js::from($rewards) }};
         var theWheel, spinIndex
@@ -59,6 +82,14 @@
                         'spins': 8,
                         'callbackFinished': 'alertPrize()'
                     }
+            });
+
+            $('#carousels').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear'
             });
 
             $('#runSpinBtn').click(function () {
@@ -95,3 +126,4 @@
 
     </script>
 @endsection
+

@@ -62,6 +62,11 @@
                                     class="ms-1 d-none d-sm-inline">Transactions</span></a>
                         </li>
                         <li>
+                            <a href="{{ route('carousels.index')  }}" class="nav-link px-0 align-middle text-secondary {{ $uri1 === 'carousels' ? $activeLinkClass : '' }}">
+                                <i class="fas fa-images"></i>&nbsp;<span
+                                    class="ms-1 d-none d-sm-inline">Carousels</span></a>
+                        </li>
+                        <li>
                             <a href="{{ route('settings')  }}" class="nav-link px-0 align-middle text-secondary {{ $uri1 === 'settings' ? $activeLinkClass : '' }}">
                                 <i class="fas fa-cog"></i>&nbsp;<span
                                     class="ms-1 d-none d-sm-inline">Clear DB</span></a>

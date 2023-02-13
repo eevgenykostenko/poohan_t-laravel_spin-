@@ -7,6 +7,7 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\CarouselController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('vouchers', VoucherController::class);
     Route::resource('transactions', TransactionController::class);
+    Route::resource('carousels', CarouselController::class);
 
     Route::get('/settings', [SettingsController::class, 'index'])
         ->name('settings');

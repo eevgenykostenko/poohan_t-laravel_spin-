@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carousel;
 use App\Models\Reward;
-use App\Models\Transaction;
-use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class RewardController extends Controller
@@ -18,7 +17,11 @@ class RewardController extends Controller
     public function home()
     {
         $rewards = Reward::all();
-        return view('home', ['rewards' => $rewards]);
+        $carousels = Carousel::all();
+        return view('home', [
+            'rewards' => $rewards,
+            'carousels' => $carousels,
+        ]);
     }
 
     /**
