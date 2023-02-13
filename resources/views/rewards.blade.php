@@ -44,6 +44,7 @@
                         <table id="manageRewardsTable" class="table">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Percentage</th>
                                 <th>Bg color</th>
@@ -69,36 +70,41 @@
 @endsection
 @section('page_script')
     @parent
+
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+            integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <script>
         var rewards = {{ Js::from($rewards) }}
         console.log(rewards)
-        $(function () {
-            drawRewardsTable()
-        })
 
-        function drawRewardsTable() {
+        const $rewardsTbody = $('#manageRewardsTable tbody')
+        $(function () {
             var rewardsHtml = rewards.reduce((html, reward) => {
                 return html + `
                     <tr>
+                        <td><i class="fas fa-arrows-alt"></i></td>
                         <td><input type="text" name="name[]" value="${reward.name}" required/></td>
                         <td><input type="number" name="percent[]" value="${reward.percent}" required/></td>
                         <td><input type="color" name="bg_color[]" value="${reward.bg_color}" required/></td>
                         <td><input type="color" name="text_color[]" value="${reward.text_color}" required/></td>
-                        <td><button type="button" class="btn btn-danger delete-reward btn-sm"><i class="fas fa-trash-alt"></i></td>
+                        <td><button type="button" class="delete-reward btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></td>
                     </tr>
                 `
             }, "")
-            $('#manageRewardsTable tbody').html(rewardsHtml)
-        }
+            $rewardsTbody.html(rewardsHtml)
+            $rewardsTbody.sortable()
+        })
+
 
         $('#addRewardBtn').click(function () {
-            $('#manageRewardsTable tbody').append(`
+            $rewardsTbody.append(`
                 <tr>
+                    <td><i class="fas fa-arrows-alt"></i></td>
                     <td><input type="text" name="name[]" value="" required/></td>
                     <td><input type="number" name="percent[]" value="0" required/></td>
                     <td><input type="color" name="bg_color[]" value="#FFFFFF" required/></td>
                     <td><input type="color" name="text_color[]" value="#000000" required/></td>
-                    <td><button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></td>
+                    <td><button type="button" class="delete-reward btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></td>
                 </tr>
             `)
         })
