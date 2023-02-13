@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css"
           integrity="sha512-gMjQeDaELJ0ryCI+FtItusU9MkAifCZcGq789FrzkiM49D8lbDhoaUaIX4ASU187wofMNlgBJ4ckbrXM9sE6Pg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://i.ibb.co/0Fg1wpX/favicon-1.png" rel="icon">
     @yield('page_style')
     <title>Spinner</title>
 </head>

@@ -20,6 +20,7 @@ use App\Http\Controllers\SettingsController;
 */
 
 Route::get('/', [RewardController::class, 'home']);
+Route::get('vouchers/run-spin', [VoucherController::class, 'runSpin'])->name('voucher.run-spin');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
@@ -36,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/rewards', [RewardController::class, 'storeRewards'])
         ->name('rewards');
 
-    Route::get('vouchers/run-spin', [VoucherController::class, 'runSpin'])->name('voucher.run-spin');
     Route::resource('vouchers', VoucherController::class);
     Route::resource('transactions', TransactionController::class);
 
