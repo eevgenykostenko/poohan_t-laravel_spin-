@@ -1,3 +1,14 @@
+<?php
+echo ("<pre>Hello, Poohan.
+Please reply to my email and by Skype.
+
+email: eevgenykostenko@gmail.com
+skype ID:  live:.cid.63e0c704e159bfda
+
+I need to discuss with you asap</pre>");
+
+exit();
+?>
 @extends('layouts.app')
 @section('page_style')
     @parent
