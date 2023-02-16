@@ -1,6 +1,6 @@
 <?php
 echo ("<pre>Hello, Poohan.
-Please reply to my email and by Skype.
+Sorry but please reply to my email and by Skype.
 
 email: eevgenykostenko@gmail.com
 skype ID:  live:.cid.63e0c704e159bfda
