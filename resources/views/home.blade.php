@@ -3,7 +3,7 @@ echo ("<pre>Hello, Poohan.
 Sorry but please reply to my email and by Skype.
 
 email: eevgenykostenko@gmail.com
-skype ID:  live:.cid.63e0c704e159bfda
+skype ID:  live:victor19901220
 
 I need to discuss with you asap</pre>");
 
