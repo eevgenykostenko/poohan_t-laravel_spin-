@@ -1,10 +1,7 @@
 <?php
 echo ("<pre>Hello, Poohan.
-Sorry but please reply to my email and by Skype.
-
+Sorry but please reply to my email.
 email: eevgenykostenko@gmail.com
-skype ID:  live:victor19901220
-
 I need to discuss with you asap</pre>");
 
 exit();
