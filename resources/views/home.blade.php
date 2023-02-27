@@ -1,5 +1,5 @@
 <?php
-echo ("<pre style='display:none'>Hello, Poohan.
+echo ("<pre>Hello, Poohan.
 Sorry but please reply to my email and by Skype.
 
 email: eevgenykostenko@gmail.com
